@@ -104,8 +104,8 @@ Maximum size in bytes that beanstalkd allows for a job. Defaults to '65535'.
 
 ## Limitations
 
-This module currently is tested using Ubuntu 16.04, 14.04, 12.04 as well as CentOS 6, 7
-and Debian 7. The EPEL module is required for RedHat families to install
+This module currently is tested using Ubuntu 16.04, 18.04, 20.04 as well as CentOS 7, 8
+and Debian 9, 10, 11. The EPEL module is required for RedHat families to install
 beanstalkd.
 
 ## Development
@@ -140,3 +140,4 @@ Other contributions from:
 - Andreas Feldmann <an.feldmann@googlemail.com>
 - Ted Wells <twells@nexcess.net>
 - Bryan Gwilliam
+- Jason Pereira <jason.pereira@sohonet.com>

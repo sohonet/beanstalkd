@@ -1,9 +1,7 @@
 #
 class beanstalkd::config inherits beanstalkd {
-  file { $beanstalkd::config:
+  file { $beanstalkd::config_file:
     ensure  => file,
-    owner   => $beanstalkd::user,
-    group   => $beanstalkd::user,
     mode    => '0644',
     content => template($beanstalkd::config_template),
   }

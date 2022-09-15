@@ -19,9 +19,19 @@
 #   will log to. Defaults to '/var/lib/beanstalkd' on Debian families and
 #   '/var/lib/beanstalkd/binlog' on RedHat families.
 #
+# [*config_file*]
+#   The location of the defaults file for beanstalkd.
+#
+# [*config_template*]
+#   The template used to generate beanstalkd config_file, this will differ
+#   based on OS family.
+#
 # [*package_ensure*]
 #   Whether the beanstalkd package is present. Defaults to 'present'. Other
 #   values are 'latest', or a specific version.
+#
+# [*package_name*]
+#   The name of the package to install, Defaults to `beanstalkd`
 #
 # [*service_ensure*]
 #   Whether the beanstalkd service should be running. Defaults to 'running'.
@@ -34,6 +44,9 @@
 # [*user*]
 #   User that the beanstalkd process runs as. Default is 'beanstalkd'.
 #
+# [*group*]
+#   Group that the beanstalkd process runs as. Default is 'beanstalkd'.
+#
 # [*max_job_size*]
 #   Maximum size in bytes that beanstalkd allows for a job. Defaults to
 #   '65535'.
@@ -44,10 +57,6 @@
 #    listen_addr      => '0.0.0.0',
 #    listen_port      => '11300',
 #    enable_binlog    => true,
-#    binlog_directory => '/var/lib/beanstalkd',
-#    package_ensure   => 'present',
-#    service_ensure   => 'running',
-#    service_enable   => true,
 #  }
 #
 # === Authors
@@ -75,10 +84,8 @@ class beanstalkd (
   String $user,
   String $group,
   String $package_name,
-  String $config,
+  String $config_file,
   String $config_template,
-  Boolean $service_start_yes,
-  Boolean $daemon_options,
   String $listen_addr      = '127.0.0.1',
   String $listen_port      = '11300',
   Boolean $enable_binlog    = false,

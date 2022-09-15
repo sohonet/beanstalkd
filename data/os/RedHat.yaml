@@ -1,4 +1,4 @@
 ---
 beanstalkd::config_template: 'beanstalkd/beanstalkd.redhat.erb'
 beanstalkd::binlog_directory: '/var/lib/beanstalkd/binlog'
-beanstalkd::config: '/etc/sysconfig/beanstalkd'
+beanstalkd::config_file: '/etc/sysconfig/beanstalkd'

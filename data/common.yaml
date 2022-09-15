@@ -2,5 +2,3 @@
 beanstalkd::package_name: 'beanstalkd'
 beanstalkd::user: 'beanstalkd'
 beanstalkd::group: 'beanstalkd'
-beanstalkd::service_start_yes: false
-beanstalkd::daemon_options: false
