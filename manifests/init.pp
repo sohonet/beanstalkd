@@ -71,23 +71,27 @@
 # limitations under the License.
 #
 class beanstalkd (
-  $listen_addr      = $beanstalkd::params::listen_addr,
-  $listen_port      = $beanstalkd::params::listen_port,
-  $enable_binlog    = $beanstalkd::params::enable_binlog,
-  $binlog_directory = $beanstalkd::params::binlog_directory,
-  $package_ensure   = $beanstalkd::params::package_ensure,
-  $service_ensure   = $beanstalkd::params::service_ensure,
-  $service_enable   = $beanstalkd::params::service_enable,
-  $user             = $beanstalkd::params::user,
-  $max_job_size     = $beanstalkd::params::max_job_size,
-) inherits beanstalkd::params {
+  String $binlog_directory,
+  String $user,
+  String $group,
+  String $package_name,
+  String $config,
+  String $config_template,
+  Boolean $service_start_yes,
+  Boolean $daemon_options,
+  String $listen_addr      = '127.0.0.1',
+  String $listen_port      = '11300',
+  Boolean $enable_binlog    = false,
+  String $package_ensure   = 'present',
+  String $service_ensure   = 'running',
+  Boolean $service_enable  = true,
+  String $max_job_size     = '65535',
+) {
+  contain 'beanstalkd::install'
+  contain 'beanstalkd::config'
+  contain 'beanstalkd::service'
 
-  # Anchor this as per #8040 - this ensures that classes won't float off and
-  # mess everything up.  You can read about this at:
-  # http://docs.puppetlabs.com/puppet/2.7/reference/lang_containment.html#known-issues
-  anchor { 'beanstalkd::begin': } ->
-  class { '::beanstalkd::install': } ->
-  class { '::beanstalkd::config': } ~>
-  class { '::beanstalkd::service': } ->
-  anchor { 'beanstalkd::end': }
+  Class['beanstalkd::install']
+  -> Class['beanstalkd::config']
+  ~> Class['beanstalkd::service']
 }

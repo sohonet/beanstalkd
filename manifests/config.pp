@@ -1,18 +1,17 @@
 #
 class beanstalkd::config inherits beanstalkd {
-
-  file { $config:
+  file { $beanstalkd::config:
     ensure  => file,
-    owner   => 'root',
-    group   => 'root',
+    owner   => $beanstalkd::user,
+    group   => $beanstalkd::user,
     mode    => '0644',
-    content => template($config_template),
+    content => template($beanstalkd::config_template),
   }
-  
-  file { $binlog_directory:
+
+  file { $beanstalkd::binlog_directory:
     ensure => directory,
-    owner  => $user,
-    group  => $group,
+    owner  => $beanstalkd::user,
+    group  => $beanstalkd::group,
     mode   => '0644',
   }
 }
